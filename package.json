@@ -8,13 +8,15 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "autoprefixer": "^9.8.0",
-    "colorette": "^1.2.0",
+    "autoprefixer": "^9.8.6",
+    "colorette": "^1.2.1",
     "core-js": "^3.6.5",
-    "materialize-css": "^1.0.0-rc.2",
+    "firebase": "^7.21.0",
+    "materialize-css": "^1.0.0",
     "register-service-worker": "^1.7.1",
-    "vue": "^2.6.11",
-    "vue-router": "^3.0.1",
+    "vue": "^2.6.6",
+    "vue-router": "^3.4.3",
+    "vuelidate": "^0.7.5",
     "vuex": "^3.5.1"
   },
   "devDependencies": {

@@ -36,6 +36,25 @@
         >пороль дложен быть не меньше {{$v.password.$params.minLength.min}} символов
         </small>
       </div>
+      <div class="input-field">
+        <input
+            id="name"
+            type="text"
+            v-model.trim="name"
+            :class="{invalid: $v.name.$dirty && !$v.name.required}"
+        >
+        <label for="name">Имя</label>
+        <small class="helper-text invalid"
+               v-if="$v.name.$dirty && !$v.name.required"
+        >Обязательное поле для заполнения
+        </small>
+      </div>
+      <p>
+        <label>
+          <input type="checkbox" v-model="agree" />
+          <span>С правилами согласен</span>
+        </label>
+      </p>
     </div>
     <div class="card-action">
       <div>
@@ -43,14 +62,14 @@
             class="btn waves-effect waves-light auth-submit"
             type="submit"
         >
-          Войти
+          Зарегистрироваться
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Нет аккаунта?
-        <router-link to="/register">Зарегистрироваться</router-link>
+        Уже есть аккаунт?
+        <router-link to="/login">Войти!</router-link>
       </p>
     </div>
   </form>
@@ -58,38 +77,39 @@
 
 <script>
 import {email, required, minLength} from 'vuelidate/lib/validators'
-import messages from "@/utils/messages";
 
 export default {
-  name: "Login",
+  name: "Register",
   data: () => ({
     email: '',
     password: '',
+    name: '',
+    agree: false
   }),
   validations: {
     email: {email, required},
-    password: {required, minLength: minLength(6)}
-  },
-  mounted() {
-    console.log(this.$route.query.massage)
-    if (messages[this.$route.query.massage])
-        this.$message(messages[this.$route.query.massage])
+    password: {required, minLength: minLength(6)},
+    name: {required},
+    agree: {checked: v => v}
   },
   methods: {
     async submitHandler(){
+
       if(this.$v.$invalid){
         this.$v.$touch()
         return
       }
       const formData = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        name: this.name
       }
-
       try {
-        await this.$store.dispatch('login', formData)
+        await  this.$store.dispatch('register', formData)
         this.$router.push('/')
-      }catch (e) {e}
+      }catch (e) {
+        console.log(e)
+      }
 
 
     }
@@ -97,6 +117,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

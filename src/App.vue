@@ -11,6 +11,8 @@
 import EmptyLayout from '@/layouts/EmptyLayout'
 import MainLayout from '@/layouts/MainLayout'
 
+
+
 export default {
   computed : {
     layout() {
@@ -24,7 +26,7 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="css">
 
 @import "~materialize-css/dist/css/materialize.min.css";
 @import "assets/css/index.css";
